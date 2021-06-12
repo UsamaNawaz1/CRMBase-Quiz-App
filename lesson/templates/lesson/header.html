@@ -1,0 +1,44 @@
+{% load static %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-light" style="padding: 13px;">
+  
+    <div class="container-fluid container">
+      <a class="navbar-brand" href="{% url 'home' %}"><img width="40%" src="{% static 'img/logo.png' %}" alt=""></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto" style="margin-left: 60%;" >
+          
+          {% if request.user.is_superuser %}
+            <li class="nav-item" style="margin-right: 9px;">
+              <a href="{% url 'addLesson' %}" class="btn btn-success">Add Lesson</a>
+            </li>
+          {% endif %}
+
+          {% if request.user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style="color: black;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{request.user.username}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% if request.user.is_superuser %}
+              <l><a style="color:#4A6DFF" class="dropdown-item" href="#">Admin</a></li>
+              {% else %}
+                <li><a class="dropdown-item" href="#">Points <span style="font-weight: bolder; color: #4A6DFF;;">{{request.user.userprofile.points}}</span></a></li>
+              {% endif %}
+              
+             
+              <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+          </li>
+          {% else %}
+            <a type="button" href="{% url 'login' %}" style="margin-right: 10px;" class="btn btn-secondary">Login</a>
+            <a type="button" href="{% url 'register' %}"  class="btn btn-warning">Join Now</a>
+          {% endif %}
+          
+        </ul>
+      </div>
+    </div>
+  </nav>

@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   
+
+    <!-- Title Page-->
+    <title>Register - CRMBase</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- Main CSS-->
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" media="all">
+
+    
+   
+</head>
+<style>
+    .box-shadow:after {
+    content: "";
+    width: 150px;
+    height: 1px;
+    margin-top: 88px;
+    margin-left: -75px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    z-index: -1;
+    -webkit-box-shadow: 0px 0px 8px 2px #000000;
+       -moz-box-shadow: 0px 0px 8px 2px #000000;
+            box-shadow: 0px 0px 8px 2px #000000;
+}
+</style>
+<body>
+    <div class="page-wrapper  p-t-130 p-b-100 font-poppins" >
+        <div class="wrapper wrapper--w680" >
+            <div class="card card-4 box-shadow" style="background-color: black;">
+                <div class="card-body">
+                    {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-warning">
+                                        <strong style="color: black;">{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                    {% endif %}
+                    <h2 style="color: white; font-weight: bolder;" class="title">Register New Account</h2>
+                    <form  method="POST">
+                        {% csrf_token %}
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    
+                                    <input class="input--style-4" type="text" placeholder="Username"  name="username" id="username">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    
+                                    <input class="input--style-4" placeholder="Email" type="email" name="email" id="email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    
+                                    <input class="input--style-4" type="text" placeholder="First Name" name="first_name" id="first_name">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    
+                                    <input class="input--style-4" placeholder="Last Name" type="text" name="last_name" id="last_name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    
+                                    <input class="input--style-4" placeholder="Password" type="password"  name="password1" id="password1">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    
+                                    <input class="input--style-4" placeholder="Repeat Password" type="password" name="password2" id="password2">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-t-15" style="padding-bottom: 5%;">
+                            <button class="btn btn--radius-2 btn--green" style="float: right;" type="submit">Create Account</button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    <script src="{% static 'js/global.js' %}"></script>
+   
+</body>
+
+</html>
